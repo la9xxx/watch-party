@@ -62,15 +62,21 @@
     if (pendingVideoId) createPlayer(pendingVideoId);
   };
 
+let currentVideoId = null;
+
   function createPlayer(videoId) {
     el("emptyVideo").style.display = "none";
     el("videoFrameWrap").style.display = "block";
     el("controls").style.display = "flex";
 
     if (player) {
-      player.loadVideoById(videoId);
+      if (videoId !== currentVideoId) {
+        currentVideoId = videoId;
+        player.loadVideoById(videoId);
+      }
       return;
     }
+   currentVideoId = videoId;
     player = new YT.Player("player", {
       videoId: videoId,
       playerVars: {
