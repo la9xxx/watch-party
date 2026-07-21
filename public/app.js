@@ -128,7 +128,8 @@ let currentVideoId = null;
 
   // gentle periodic drift correction using the real player clock
   setInterval(() => {
-    if (!player || typeof player.getCurrentTime !== "function" || !roomState.videoId) return;
+    if (!player || typeof player.getCurrentTime !== "function" ||
+        !roomState.videoId) return;if (!roomState.isPlaying) return;
     const actual = player.getCurrentTime();
     const target = expectedTime(roomState);
     if (Math.abs(actual - target) > 2) {
