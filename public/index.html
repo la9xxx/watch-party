@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Смотрим вместе</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <!-- LANDING SCREEN -->
+  <div id="landing" class="landing-wrap">
+    <div class="landing-card">
+      <div class="reel-row">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="title-row">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M2 8h20M8 3v5M16 3v5"/><path d="M10 12l4 2-4 2z" fill="#F5A623"/></svg>
+        <h1>Смотрим вместе</h1>
+      </div>
+      <p class="subtitle">Создай комнату, скинь код друзьям — и смотрите YouTube синхронно, с чатом сбоку.</p>
+
+      <label>Твоё имя</label>
+      <input id="nameInput" type="text" maxlength="24" placeholder="Например, Аня" />
+
+      <label>Код комнаты (оставь пустым, чтобы создать новую)</label>
+      <input id="roomInput" type="text" maxlength="12" placeholder="Например, K7QRM" style="text-transform:uppercase" />
+
+      <div id="joinError" class="error"></div>
+
+      <button id="joinBtn" class="primary-btn">Войти / создать комнату</button>
+
+      <p class="footnote">Комната видна всем, у кого есть код — это общий "ключ" для друзей, не приватное пространство.</p>
+    </div>
+  </div>
+
+  <!-- ROOM SCREEN -->
+  <div id="room" class="room-wrap" style="display:none">
+    <div class="header">
+      <div class="header-left">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M2 8h20M8 3v5M16 3v5"/></svg>
+        <span class="header-title">Комната</span>
+        <span id="codeChip" class="code-chip"></span>
+        <button id="copyBtn" class="copy-btn" title="Скопировать код">⧉</button>
+      </div>
+      <div class="user-chip"><span id="userDot" class="dot"></span><span id="userName"></span></div>
+    </div>
+
+    <div class="main-grid">
+      <div class="video-col">
+        <div id="emptyVideo" class="empty-video">
+          <p>Пока нет видео — вставь ссылку на YouTube ниже</p>
+        </div>
+        <div id="videoFrameWrap" class="video-frame-wrap" style="display:none">
+          <div id="player"></div>
+        </div>
+
+        <div class="url-row">
+          <input id="urlInput" type="text" placeholder="Вставь ссылку на YouTube и нажми Enter" />
+          <button id="setVideoBtn" class="secondary-btn">Задать</button>
+        </div>
+
+        <div id="controls" class="controls" style="display:none">
+          <button id="backBtn" class="control-btn" title="-10 сек">«10</button>
+          <button id="playPauseBtn" class="play-btn">▶</button>
+          <button id="fwdBtn" class="control-btn" title="+10 сек">10»</button>
+          <span id="timeText" class="time-text">0:00</span>
+        </div>
+      </div>
+
+      <div class="chat-col">
+        <div class="chat-header">Чат</div>
+        <div id="chatMessages" class="chat-messages">
+          <div class="chat-empty">Пока тихо. Напиши первым :)</div>
+        </div>
+        <div class="chat-input-row">
+          <input id="chatInput" type="text" placeholder="Написать в чат..." />
+          <button id="sendBtn" class="send-btn">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
