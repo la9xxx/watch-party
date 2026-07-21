@@ -255,4 +255,13 @@
     socket.emit("seek", { videoTime: t, isPlaying });
   }
 
-  el("sendBtn").addEventListener("click",
+  el("sendBtn").addEventListener("click",sendChat);
+  el("chatInput").addEventListener("keydown", (e) => { if (e.key === "Enter") sendChat(); });
+
+  function sendChat() {
+    const text = el("chatInput").value.trim();
+    if (!text) return;
+    el("chatInput").value = "";
+    socket.emit("chat-message", { text });
+  }
+})();
